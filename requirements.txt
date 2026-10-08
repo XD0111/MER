@@ -7,3 +7,4 @@ seaborn
 aiohttp
 openai
 scikit-learn
+pandas

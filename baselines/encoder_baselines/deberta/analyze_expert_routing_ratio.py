@@ -99,28 +99,8 @@ event_names = [
     "共指", "正子事件", "负子事件"
 ]
 
-#plaf
-# args.contextual_path="/home/wzl/ChenC/ChenC20250707/checkpoint/True_ContextExpert_model.pth"
-# args.router_path="/home/wzl/ChenC/ChenC20250707/checkpoint_change/2025-07-10 09_43_46_AER_model.pth"
-# output_file=f'out/{t}_expert_routing_ratio_plaf.csv'
-# args.contextual_path="/home/wzl/ChenC/ChenC20250707/checkpoint/True_ContextExpert_model.pth"
-# args.router_path="/home/wzl/ChenC/ChenC20250707/checkpoint_change/2025-07-09 16_15_40_AER_model.pth"
-# output_file=f'out/{t}_expert_routing_ratio_plaf.csv'
-args.contextual_path="/home/wzl/ChenC/ChenC20250707/checkpoint/True_ContextExpert_model.pth"
-args.router_path="/home/wzl/ChenC/ChenC20250707/checkpoint_change/2025-07-09 17_00_04_AER_model.pth"
-args.MOE_path="/home/wzl/ChenC/ChenC20250707/checkpoint_change/2025-07-09 17_00_04_MOE_model.pth"
-
-output_file=f'out/2025-07-09 17_00_04_expert_routing_ratio_plaf.csv'
-
-
-# #新
-# args.contextual_path="/home/wzl/ChenC/ChenC20250707/checkpoint/ContextExpert_model.pth"
-# args.router_path="/home/wzl/ChenC/ChenC20250707/checkpoint_change/2025-07-10 09_55_50_AER_model.pth"
-# output_file=f'out/{t}_expert_routing_ratio.csv'
-# args.contextual_path="/home/wzl/ChenC/ChenC20250707/checkpoint/ContextExpert_model.pth"
-# args.router_path="/home/wzl/ChenC/ChenC20250707/checkpoint_change/2025-07-10 15_31_51_AER_model.pth"
-# output_file=f'out/{t}_expert_routing_ratio.csv'
-
+# Checkpoint paths are configured through parameter.py / CLI arguments.
+output_file = f'out/{t}_expert_routing_ratio.csv'
 
 # ---------- network ----------
 

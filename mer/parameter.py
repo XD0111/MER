@@ -7,10 +7,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='EKGRR')
 
     # Pre-trained Language Model
-    # parser.add_argument('--model_name', default='/home/wzl/prompt-learning/PLMs/RoBERTa/RoBERTaForMaskedLM/roberta-base', type=str, help='Model used to be encoder')
-    # parser.add_argument('--model_name', default='/home/luoq/Lc_TEMP/Lc_Roberta/', type=str, help='Model used to be encoder')
-    # parser.add_argument('--model_name', default='/home/bbx/user_lc/Based_PLM/PLM/RoBERTa/RobertaModel/roberta-base', type=str, help='Model used to be encoder')
-    parser.add_argument('--model_name', default='/home/gp3_liangc/home/PLMs/RoBERTa/RoBERTaForMaskedLM/roberta-base/', type=str, help='Pre-trained Language Model used to be encoder')
+    parser.add_argument('--model_name', default='roberta-base', type=str, help='Pre-trained Language Model used to be encoder')
     parser.add_argument('--vocab_size', default=50265, type=int, help='Size of RoBERTa vocab')
 
     # Dataset
@@ -48,18 +45,12 @@ def parse_args():
     parser.add_argument('--wd', default=1e-2, type=float, help='weight decay')
     parser.add_argument('--stage', default=6, type=int, help='Stage choice')
 
-    # parser.add_argument('--common_path', default='./checkpoint/MentionExpert_model.pth', type=str, help='Path')
-    # parser.add_argument('--title_path', default='./checkpoint/SentenceExpert_model.pth', type=str, help='Path')
-    # parser.add_argument('--contextual_path', default='./checkpoint/ContextExpert_model.pth', type=str, help='Path')
-    # parser.add_argument('--path_path', default='./checkpoint/PathExpert_model.pth', type=str, help='Path')
-    # parser.add_argument('--graph_path', default='./checkpoint/GraphExpert_model.pth', type=str, help='Path')
-    # parser.add_argument('--router_path', default='./checkpoint/RoterExpert_model.pth', type=str, help='Path')
-    parser.add_argument('--common_path', default='/home/gp3_liangc/home/coding/EKG/20250601-base-V1.33/checkpoint/MentionExpert_model.pth', type=str, help='Path')
-    parser.add_argument('--title_path', default='/home/gp3_liangc/home/coding/EKG/20250601-base-V1.33/checkpoint/SentenceExpert_model.pth', type=str, help='Path')
-    parser.add_argument('--contextual_path', default='/home/gp3_liangc/home/coding/EKG/20250601-base-V1.33/checkpoint/True_ContextExpert_model.pth', type=str, help='Path')
-    parser.add_argument('--path_path', default='/home/gp3_liangc/home/coding/EKG/20250601-base-V1.33/checkpoint/PathExpert_model.pth', type=str, help='Path')
-    parser.add_argument('--graph_path', default='/home/gp3_liangc/home/coding/EKG/20250601-base-V1.33/checkpoint/GraphExpert_model.pth', type=str, help='Path')
-    parser.add_argument('--router_path', default='/home/gp3_liangc/home/coding/EKG/20250601-base-V1.33/checkpoint/RoterExpert_model.pth', type=str, help='Path')
+    parser.add_argument('--common_path', default='./checkpoint/MentionExpert_model.pth', type=str, help='Path')
+    parser.add_argument('--title_path', default='./checkpoint/SentenceExpert_model.pth', type=str, help='Path')
+    parser.add_argument('--contextual_path', default='./checkpoint/ContextExpert_model.pth', type=str, help='Path')
+    parser.add_argument('--path_path', default='./checkpoint/PathExpert_model.pth', type=str, help='Path')
+    parser.add_argument('--graph_path', default='./checkpoint/GraphExpert_model.pth', type=str, help='Path')
+    parser.add_argument('--router_path', default='./checkpoint/AER_model.pth', type=str, help='Path')
 
     # Others
     parser.add_argument('--seed', default=209, type=int, help='Seed for reproducibility')

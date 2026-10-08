@@ -8,7 +8,7 @@ def parse_args():
 
     # Pre-trained Language Model
     parser.add_argument('--gpu_id', default='0', type=str, help='Choose which GPU to use, e.g., "0", "1", or "0,1"')
-    parser.add_argument('--model_name', default='/home/wzl/prompt-learning/PLMs/ernie-2.0-en', type=str, help='Pre-trained Language Model used to be encoder')
+    parser.add_argument('--model_name', default='nghuyong/ernie-2.0-en', type=str, help='Pre-trained Language Model used to be encoder')
     parser.add_argument('--vocab_size', default=30522, type=int, help='Size of Ernie vocab')
 
     # Dataset

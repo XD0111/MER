@@ -1,38 +1,97 @@
-# Python
+# Python and local environments
 __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
 venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Editors, agent state, and local working notes
 .idea/
 .vscode/
+.mimosa/
+.local/
 
-# 模型权重与训练缓存（体积大，不入库）
+# Internal validation and obsolete experimental copies (kept locally)
+/run_smoke.sh
+/tools/smoke_test.py
+/data/smoke/
+smoke_*.log
+smoke_summary*.txt
+/baselines/encoder_baselines/ernie/Models/model_1.py
+/baselines/encoder_baselines/ernie/data/processe_data_1.py
+
+# Local paper drafts
+/MER__*.pdf
+
+# Model weights, training caches, and archives
 *.pth
 *.pt
 *.bin
+*.safetensors
+*.ckpt
+*.onnx
 *.rar
 *.zip
-data_cache*.pth
+*.tar
+*.tar.gz
+*.7z
 checkpoint*/
 checkpoints/
+.cache/
 
-# 数据（train/valid/test.json 超 GitHub 单文件限制，经 Release/网盘分发）
-mer/data/*.json
-baselines/encoder_baselines/deberta/data/*.json
-!data/samples/*.json
+# Full datasets and generated training data; format examples remain public
+/data/train.json
+/data/valid.json
+/data/test.json
+/mer/data/*.json
+/baselines/encoder_baselines/*/data/*.json
+/baselines/llm_prompt/data/
+/baselines/llama_lora/data/raw/train.json
+/baselines/llama_lora/data/raw/valid.json
+/baselines/llama_lora/data/raw/test.json
+/baselines/llama_lora/data/raw/train.jsonl
+/baselines/llama_lora/data/raw/valid.jsonl
+/baselines/llama_lora/data/raw/test.jsonl
+/baselines/llama_lora/data/processed/
+/baselines/llama_lora/data/processed_event/
 
-# 实验输出与日志
+# Experiment outputs and logs
 out/
+outputs/
+results/
 logs/
+runs/
+wandb/
 *.log
+events.out.tfevents.*
+/baselines/llm_prompt/test_file*.txt
+/baselines/llm_prompt/*_zeroshot*.txt
+/baselines/llm_prompt/*_fewshot*.txt
+/plot_analysis/*.png
+/plot_analysis/*.pdf
+/plot_analysis/*.svg
+/expert_routing*.png
+/router_topk*.png
+/topk.png
+/study_fewshot.png
+/study_noise.png
 
-# 密钥：一律走环境变量
+# Credentials
 .env
+.env.*
+!.env.example
 *.key
+*.pem
 
-# 系统文件
+# Operating system files
 .DS_Store
 Thumbs.db
+Desktop.ini
 ~$*
-.mimosa/

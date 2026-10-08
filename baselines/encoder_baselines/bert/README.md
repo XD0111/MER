@@ -1,26 +1,33 @@
-# BERT 编码器对比基线
+# BERT encoder baseline
 
-MER 的 **BERT-base-uncased** 编码器版本（论文 Table 3 中 `MER BERT` 行，平均 F1 58.6）。
-完整代码已入库，来源：`nlp-3090:/home/wzl/CaiW/MER/EGC_bert_new`（AutoModel 统一版）。
-**已验证**：RTX 4090 上 stage 1→6 全流程跑通（transformers 4.40 + torch 2.3）。
+This implementation uses `AutoModelForMaskedLM` and defaults to `google-bert/bert-base-uncased`. Relation-token IDs are obtained from the tokenizer.
 
-## 与主基线（mer/，RoBERTa）的差异
+The stages are **1 Mention, 2 Sentence, 3 Context, 4 Document, 5 Graph, 6 AER**. Unlike the main RoBERTa implementation, this variant uses Document at stage 4.
 
-- 模型类：`AutoModelForMaskedLM` + `AutoTokenizer(use_fast=False)`，按权重 config 自动选择；
-- 答案空间 token ID 通过 tokenizer 动态获取（`data/processe_data.py` 预处理时
-  `add_tokens` 并更新 `args.vocab_size`），无硬编码；
-- 专家阵容：Common / Title / Contextual / **Document** / Graph 共 5 个 + Router（stage 1-6）。
+## Training
 
-## 运行
+Run from this directory after installing the root requirements and obtaining the dataset:
 
 ```bash
-# 权重：google-bert/bert-base-uncased（词表 30522，加 11 个提示 token 后 30533）
-python main.py --model_name /path/to/bert-base-uncased --stage 1 --num_epoch 15 ...
-# ... 依次 stage 2/3/4/5 ...
-python main.py --model_name /path/to/bert-base-uncased --stage 6 --num_epoch 15 ...
+mkdir -p checkpoint_bert_1.0 out
+set -e
+for stage in 1 2 3 4 5; do
+  MER_SKIP_FINAL_TEST=1 python main.py \
+    --model_name google-bert/bert-base-uncased \
+    --train_data_path ../../../mer/data/train.json \
+    --valid_data_path ../../../mer/data/valid.json \
+    --test_data_path ../../../mer/data/test.json \
+    --stage "$stage" --t_lr 5e-6 --num_epoch 15
+done
+
+# Run after all five experts have finished successfully.
+python main.py \
+  --train_data_path ../../../mer/data/train.json \
+  --valid_data_path ../../../mer/data/valid.json \
+  --test_data_path ../../../mer/data/test.json \
+  --stage 6 --t_lr 5e-6 --num_epoch 15
 ```
 
-注意：main.py 末尾有一处整模测试（需要全部 5 个专家的 checkpoint）。训练 stage 1-5 时
-可设 `MER_SKIP_FINAL_TEST=1` 跳过它，stage 6 时正常执行（此时 checkpoint 已齐）。
+`MER_SKIP_FINAL_TEST=1` skips the additional full-model test at the end of expert training, which otherwise requires all expert checkpoints. `bash run.sh` launches only stage 6 with its own preset parameters.
 
-环境变量 `CUDA_VISIBLE_DEVICES` 可覆盖默认卡号（默认沿用原实验机的 1 号卡）。
+The default checkpoint directory is `checkpoint_bert_1.0/`. Other train ratios and ablations change the save directory; update the checkpoint-loading arguments accordingly. `--model_name` also accepts a local model directory. See [parameter.py](parameter.py) for GPU, ablation, and training settings.

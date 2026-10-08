@@ -1,5 +1,7 @@
 # MER: Multi-Expert Routing for Event Graph Completion
 
+**中文** | [English](README_EN.md)
+
 官方代码库，对应论文 *Multi-Expert Routing for Event Graph Completion*（EMNLP 2026）。
 
 MER（Multi-Expert Routing）是一个面向**异构事件图补全**（Event Graph Completion, EGC）的多专家框架：将异构事件图转换为结构化三元组序列，用提示学习范式在预训练语言模型上编码语义与结构信息，由 **AER**（Adaptive Expert Routing，自适应专家路由）模块针对每个查询事件对动态选择并加权聚合 5 个专家的预测，同时完成四类事件关系补全：
@@ -29,16 +31,12 @@ MER（Multi-Expert Routing）是一个面向**异构事件图补全**（Event Gr
 | Adaptive Expert Routing (AER) | `AER` | `Models/Router.py` | 动态选择 + 加权聚合 |
 | MER 框架整体 | `MERModel` | `Models/model.py` | 五专家 + AER |
 
-> 历史命名说明：重构前旧类名为 `CommonExpert` / `TitleExpert` / `ContextualExpert` /
-> `MoERouter` / `MoeModel`（对应 ARR 版本的 Sequence / Document 等旧称），
-> checkpoint 文件名已同步更新（`MentionExpert_model.pth` 等）。
-> `baselines/encoder_baselines/{bert,ernie}/` 中的 `DocumentExpert.py` 沿用其迭代快照的
-> 旧命名（stage-4 专家），论文最终阵容中无此专家。
-
 ## 目录结构
 
 ```
 MER/
+├── README.md                # 中文说明
+├── README_EN.md             # 英文说明
 ├── mer/                     # 主模型代码（RoBERTa 主基线，论文主表结果）
 │   ├── main.py              # 两阶段训练入口（stage 1-5 训练各专家，stage 6 训练路由器）
 │   ├── parameter.py         # 全部超参数
@@ -90,10 +88,7 @@ bash run.sh
 ## 编码器对比基线
 
 MER 以 **RoBERTa-base** 为主基线（`mer/`，论文主表）；**DeBERTa / BERT / ERNIE** 作为
-编码器对比基线（PLM Ablation 表）。四个编码器的完整代码均已入库，且全部在
-RTX 4090（transformers 4.40 + torch 2.3）上完成 stage 1→6 全流程验证（2026-10-08）。
-代码差异集中在模型文件里的 4 处
-（详见 [baselines/encoder_baselines/README.md](baselines/encoder_baselines/README.md)）：
+编码器对比基线（PLM Ablation 表）。代码差异集中在模型文件里的 4 处（详见 [baselines/encoder_baselines/README.md](baselines/encoder_baselines/README.md)）：
 
 1. HuggingFace 模型类（`RobertaForMaskedLM` / `DebertaForMaskedLM` / `AutoModelForMaskedLM`）
 2. 编码器主体属性（`.roberta(...)` / `.deberta(...)` / `.bert(...)` / `.ernie(...)`)
@@ -103,7 +98,6 @@ RTX 4090（transformers 4.40 + torch 2.3）上完成 stage 1→6 全流程验证
 - `mer/` = RoBERTa 主基线（与论文主表对应）
 - `baselines/encoder_baselines/deberta/` = DeBERTa（4 专家配置，跳过 stage 4，见其 README）
 - `baselines/encoder_baselines/bert|ernie/` = BERT / ERNIE（5 专家 + Router，stage 1→6）
-- `tools/smoke_test.py` = 无需 GPU/数据/权重的结构自检脚本
 
 ## 引用
 
@@ -117,7 +111,3 @@ RTX 4090（transformers 4.40 + torch 2.3）上完成 stage 1→6 全流程验证
   year      = {2026}
 }
 ```
-
-## License
-
-暂未设置，发布前请确认（论文配套代码常用 MIT / Apache-2.0）。

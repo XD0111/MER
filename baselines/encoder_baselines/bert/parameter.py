@@ -11,7 +11,7 @@ def parse_args():
     parser.add_argument('--ablation', default='none', type=str,
                         choices=['none', 'common', 'title', 'contextual', 'document', 'graph'],
                         help='Choose which expert to remove for ablation study')
-    parser.add_argument('--model_name', default='/home/wzl/prompt-learning/PLMs/BERT/BertForMaskedLM/bert-base-uncased', type=str)
+    parser.add_argument('--model_name', default='google-bert/bert-base-uncased', type=str)
     parser.add_argument('--vocab_size', default=30522, type=int, help='Size of RoBERTa vocab')
     parser.add_argument('--train_ratio', default=1.0, type=float)
 
