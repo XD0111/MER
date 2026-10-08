@@ -1,0 +1,9 @@
+torch>=1.13
+transformers>=4.20,<5
+numpy
+tqdm
+matplotlib
+seaborn
+aiohttp
+openai
+scikit-learn

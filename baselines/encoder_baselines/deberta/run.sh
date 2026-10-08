@@ -1,0 +1,2 @@
+python main.py --t_lr 5e-3 --stage 6 --num_epoch 15
+

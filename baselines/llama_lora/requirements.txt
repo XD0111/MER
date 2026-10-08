@@ -1,0 +1,10 @@
+torch>=2.2.0
+transformers>=4.49.0
+datasets>=3.0.0
+accelerate>=1.0.0
+peft>=0.18.0
+trl>=0.25.0
+bitsandbytes>=0.43.0
+safetensors>=0.4.5
+PyYAML>=6.0.1
+tqdm>=4.66.0

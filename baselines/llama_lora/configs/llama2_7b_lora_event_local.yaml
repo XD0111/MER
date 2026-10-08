@@ -1,0 +1,55 @@
+# Llama-2-7B LoRA/QLoRA instruction tuning for event-relation data.
+# Set before running:
+#   export LLAMA2_7B_PATH=/absolute/path/to/your/local/Llama-2-7b-hf
+
+model_name_or_path: ${LLAMA2_7B_PATH}
+train_file: data/processed_event/train.jsonl
+eval_file: data/processed_event/valid.jsonl
+output_dir: outputs/llama2_7b_lora_event_sft
+
+max_seq_length: 2048
+packing: false
+
+use_qlora: true
+load_in_4bit: true
+bnb_4bit_quant_type: nf4
+bnb_4bit_compute_dtype: bfloat16
+bnb_4bit_use_double_quant: true
+
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_bias: none
+target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+num_train_epochs: 3
+learning_rate: 2.0e-4
+warmup_ratio: 0.03
+weight_decay: 0.0
+lr_scheduler_type: cosine
+per_device_train_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 16
+optim: paged_adamw_8bit
+max_grad_norm: 0.3
+gradient_checkpointing: true
+bf16: true
+fp16: false
+tf32: true
+
+logging_steps: 10
+eval_strategy: steps
+eval_steps: 100
+save_strategy: steps
+save_steps: 100
+save_total_limit: 3
+report_to: none
+seed: 42
+resume_from_checkpoint: null

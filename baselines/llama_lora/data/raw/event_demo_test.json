@@ -1,0 +1,14 @@
+[
+  [
+    {
+      "node": {
+        "E1": {"mention": "explosion", "sent_id": 0, "sentence": "The explosion damaged the building .", "location": [1, 2], "type": "event"},
+        "E2": {"mention": "damage", "sent_id": 0, "sentence": "The explosion damaged the building .", "location": [2, 3], "type": "event"}
+      },
+      "relation": {"SUB_EVENT": [], "TEMPORAL": [], "CAUSAL": [["E1", "E2"]], "COF_EVENT": []},
+      "sentences": {"0": "The explosion damaged the building ."}
+    },
+    ["E1", "E2"],
+    [2, 2, 0, 1]
+  ]
+]
